@@ -111,6 +111,13 @@ func main() {
   //watchlist := cache.NewListWatchFromClient(clientset.Core().RESTClient(), "pods", v1.NamespaceDefault, fields.Everything())
   //watchPods(clientset)
   //listPods(clientset)
-  watchEvents(clientset)
+  //watchEvents(clientset)
+
+  namespaces, err := clientset.CoreV1().Namespaces().List(metav1.ListOptions{})
+  if err != nil {
+    panic(err.Error())
+  }
+  fmt.Printf("There are %d namespaces in the cluster\n", len(namespaces.Items))
+  // _, err := clientset.CoreV1().Namespaces().Create(&v1.Namespace{ObjectMeta: meta_v1.ObjectMeta{Name: name}})
 
 }
